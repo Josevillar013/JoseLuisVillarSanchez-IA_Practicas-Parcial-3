@@ -1,4 +1,21 @@
+import networkx as nx
+
 import sys  # Importa el módulo sys (aunque no se usa en este código)
+import matplotlib.pyplot as plt  # Importa la librería para graficar
+
+def draw_graph(graph, path=None):  # Define la función para dibujar el grafo y opcionalmente un camino
+    G = nx.Graph()  # Crea un objeto grafo vacío de NetworkX
+    for node, neighbors in graph.items():  # Itera sobre cada nodo y sus vecinos
+        for neighbor, weight in neighbors.items():  # Itera sobre cada vecino y el peso de la arista
+            G.add_edge(node, neighbor, weight=weight)  # Agrega la arista al grafo con su peso
+    pos = nx.spring_layout(G)  # Calcula la posición de los nodos para el dibujo
+    edge_labels = nx.get_edge_attributes(G, 'weight')  # Obtiene las etiquetas de los pesos de las aristas
+    nx.draw(G, pos, with_labels=True, node_color='lightblue', node_size=800, font_weight='bold')  # Dibuja los nodos y aristas
+    nx.draw_networkx_edge_labels(G, pos, edge_labels=edge_labels)  # Dibuja las etiquetas de los pesos en las aristas
+    if path:  # Si se proporciona un camino
+        path_edges = list(zip(path, path[1:]))  # Crea una lista de aristas que forman el camino
+        nx.draw_networkx_edges(G, pos, edgelist=path_edges, edge_color='r', width=2)  # Dibuja el camino resaltado en rojo
+    plt.show()  # Muestra la gráfica
 
 def dijkstra(graph, start):
     visited = set()  # Conjunto para almacenar los nodos visitados
