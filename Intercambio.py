@@ -1,7 +1,11 @@
 def bubble_sort(arr):
+    # Obtiene la longitud de la lista
     n = len(arr)
+    # Recorre toda la lista
     for i in range(n):
+        # Recorre la lista desde el principio hasta el elemento no ordenado
         for j in range(0, n - i - 1):
+            # Si el elemento actual es mayor que el siguiente, los intercambia
             if arr[j] > arr[j + 1]:
                 # Intercambio de elementos
                 arr[j], arr[j + 1] = arr[j + 1], arr[j]
@@ -29,3 +33,4 @@ if __name__ == "__main__":
     selection_sorted = datos.copy()
     selection_sort(selection_sorted)
     print("Ordenado con Selection Sort:", selection_sorted)
+    
